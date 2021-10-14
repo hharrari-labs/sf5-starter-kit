@@ -1,0 +1,43 @@
+{% block infos %}
+	<div class="row">
+		<div class="col-lg-4 col-md-12">
+			{{ form_row(form.firstName) }}
+		</div>
+		<div class="col-lg-4 col-md-12">
+			{{ form_row(form.lastName) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-12">
+			{{ form_row(form.username) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-md-12">
+			{{ form_row(form.email) }}
+		</div>
+	</div>
+{% endblock infos %}
+
+{% block password %}
+	<div class="row">
+		<div class="col-lg-4 col-md-12">
+			{{ form_row(form.password) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-12">
+			{{ form_row(form.newPassword) }}
+		</div>
+	</div>
+{% endblock password %}
+
+{% block submit %}
+	{{ form_row(form._token) }}
+
+	<div class="row">
+		<div class="col-12 text-center mt-3">
+			{{ form_row(form.submit) }}
+		</div>
+	</div>
+{% endblock submit %}

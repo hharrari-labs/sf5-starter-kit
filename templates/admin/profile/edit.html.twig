@@ -1,0 +1,29 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title "Profil" %}
+
+{% block title_h1 "Votre profil" %}
+
+{% block body %}
+    <div class="card shadow mt-3">
+        <div class="card-header d-flex align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Éditer votre profil</h5>
+            <a href="{{ path('admin_profile_password') }}" class="btn btn-danger btn-icon-split btn-sm ml-auto">
+                <span class="icon text-white-50"><i class="fas fa-key"></i></span>
+                <span class="text">Réinitialiser votre mot de passe</span>
+            </a>
+        </div>
+        <div class="card-body">
+
+            {{ form_start(form) }}
+
+                {{ block("infos", "admin/profile/_form.html.twig") }}
+
+                {{ block("submit", "admin/profile/_form.html.twig") }}
+
+            {{ form_end(form, {"render_rest": false}) }}
+        </div>
+    </div>
+
+    
+{% endblock %}

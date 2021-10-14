@@ -1,0 +1,73 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title "Liste des utilisateurs" %}
+
+{% block title_h1 "Liste des utilisateurs" %}
+
+{% block stylesheets %}
+  <link href="{{ asset("sbadmin2/vendor/datatables/dataTables.bootstrap4.min.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+	<div class="card shadow my-4">
+        <div class="card-header py-2 d-flex align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des utilisateurs</h6>
+            <a href="{{ path("admin_user_add") }}" class="btn btn-success btn-icon-split ml-auto btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Ajouter</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="userTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center text-uppercase">Prénom / Nom</th>
+                            <th class="text-center text-uppercase">E-mail</th>
+                            <th class="text-center text-uppercase">Nom d'utilisateur</th>
+                            <th class="text-center text-uppercase visible">Rôles</th>
+                            <th class="text-center text-uppercase entry-date">Créé le</th>
+                            <th class="text-center text-uppercase action">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="text-center align-middle"><span class="font-weight-bold">{{ user.fullName }}</span></td>
+                            <td class="text-center align-middle">{{ user.email }}</td>
+                            <td class="text-center align-middle">{{ user.username }}</td>
+                            <td class="text-center align-middle visible">{{ user.roles|role }}</td>
+                            <td class="text-center align-middle">{{ user.createdAt | format_datetime('medium', 'medium', locale = app.request.locale) }}</td>
+                            <td class="text-center align-middle">
+								<a href="{{ path("admin_user_edit", {id: user.id}) }}" class="btn btn-primary rounded with-icon">
+									<i class="far fa-edit"></i>
+								</a>
+                                <form class="d-inline-block" action="{{ url('admin_user_delete', { id: user.id }) }}" method="post">
+                                
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
+
+                                    <button class="btn btn-danger rounded with-icon" type="submit">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset("sbadmin2/vendor/datatables/jquery.dataTables.min.js") }}"></script>
+  <script src="{{ asset("sbadmin2/vendor/datatables/dataTables.bootstrap4.min.js") }}"></script>
+
+  {{ encore_entry_script_tags('datatable_user') }}
+{% endblock %}

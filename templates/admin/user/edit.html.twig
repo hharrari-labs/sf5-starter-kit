@@ -1,0 +1,39 @@
+{% extends "admin/base.html.twig" %}
+{% form_theme form "admin/user/_form.html.twig" %}
+
+{% block title "Edition d'un utilisateur" %}
+
+{% block title_h1 "Éditer un utilisateur" %}
+
+{% block body %}
+
+	{{ form_start(form) }}
+	
+	<div class="row">
+
+		<div class="col-12">
+			<hr>
+		</div>
+
+		<div class="col-md-12 col-sm-12">
+			<div class="row">
+				<div class="col-12">
+					<div class="card shadow mt-3">
+						<div class="card-header d-flex align-items-center">
+							<h6 class="m-0 font-weight-bold text-primary">Éditer les informations de l'utilisateur</h5>
+						</div>
+						<div class="card-body">
+							{{ block("infos", "admin/user/_form.html.twig") }}
+
+							{{ block("submit", "admin/user/_form.html.twig") }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	{{ form_end(form, {"render_rest": false}) }}
+
+{% endblock %}
